@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/youmengh/assignment-2--intro-to-internet-programming--cs-275--spring-2021#readme",
   "devDependencies": {
+    "browser-sync": "^2.26.14",
     "eslint": "^7.24.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
