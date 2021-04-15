@@ -19,6 +19,7 @@
   "homepage": "https://github.com/youmengh/assignment-2--intro-to-internet-programming--cs-275--spring-2021#readme",
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0"
+    "gulp-babel": "^8.0.0",
+    "gulp-html": "^3.4.0"
   }
 }
