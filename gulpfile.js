@@ -3,6 +3,7 @@ const babel = require(`gulp-babel`);
 const htmlValidator = require(`gulp-html`);
 const htmlCompressor = require(`gulp-htmlmin`);
 const jsLinter = require(`gulp-eslint`);
+const cssLinter = require(`gulp-stylelint`);
 
 let validateHTML = () => {
   return src([
@@ -41,6 +42,17 @@ let lintJS = () => {
       .pipe(jsLinter.formatEach(`compact`, process.stderr));
 };
 
+let lintCSS = () => {
+  return src(`dev/css/*.css`)
+      .pipe(cssLinter({
+          failAfterError: true,
+          reporters: [
+              {formatter: `verbose`, console: true}
+          ]
+      }));
+};
+
 exports.validateHTML = validateHTML;
 exports.compressHTML = compressHTML;
 exports.lintJS = lintJS;
+exports.lintCSS = lintCSS;
