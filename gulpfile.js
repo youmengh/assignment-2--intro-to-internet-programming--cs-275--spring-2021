@@ -4,6 +4,40 @@ const htmlValidator = require(`gulp-html`);
 const htmlCompressor = require(`gulp-htmlmin`);
 const jsLinter = require(`gulp-eslint`);
 const cssLinter = require(`gulp-stylelint`);
+const jsCompressor = require(`gulp-uglify`);
+const browserSync = require(`browser-sync`);
+const reload = browserSync.reload;
+let browserChoice = `default`;
+
+async function safari () {
+  browserChoice = `safari`;
+}
+
+async function firefox () {
+  browserChoice = `firefox`;
+}
+
+async function chrome () {
+  browserChoice = `google chrome`;
+}
+
+async function opera () {
+  browserChoice = `opera`;
+}
+
+async function edge () {
+  browserChoice = `microsoft-edge`;
+}
+
+async function allBrowsers () {
+  browserChoice = [
+      `safari`,
+      `firefox`,
+      `google chrome`,
+      `opera`,
+      `microsoft-edge`
+  ];
+}
 
 let validateHTML = () => {
   return src([
@@ -42,6 +76,13 @@ let lintJS = () => {
       .pipe(jsLinter.formatEach(`compact`, process.stderr));
 };
 
+let transpileJSForProd = () => {
+  return src(`dev/scripts/*.js`)
+      .pipe(babel())
+      .pipe(jsCompressor())
+      .pipe(dest(`prod/scripts`));
+};
+
 let lintCSS = () => {
   return src(`dev/css/*.css`)
       .pipe(cssLinter({
@@ -52,7 +93,76 @@ let lintCSS = () => {
       }));
 };
 
+let compileCSSForProd = () => {
+  return src(`dev/css/style.css`)
+      .pipe(sass({
+          outputStyle: `compressed`,
+          precision: 10
+      }).on(`error`, sass.logError))
+      .pipe(dest(`prod/css`));
+};
+
+let serve = () => {
+  browserSync({
+      notify: true,
+      port: 9000,
+      reloadDelay: 50,
+      browser: browserChoice,
+      server: {
+          baseDir: [
+              `temp`,
+              `dev`,
+              `dev/html`
+          ]
+      }
+  });
+
+  watch(`dev/scripts/*.js`,
+      series(lintJS, transpileJSForDev)
+  ).on(`change`, reload);
+
+  watch(`dev/styles/**/*.scss`,
+      series(compileCSSForDev)
+  ).on(`change`, reload);
+
+  watch(`dev/html/**/*.html`,
+      series(validateHTML)
+  ).on(`change`, reload);
+
+  watch(`dev/img/**/*`).on(`change`, reload);
+};
+
+async function clean() {
+  let fs = require(`fs`),
+      i,
+      foldersToDelete = [`./temp`, `prod`];
+
+  for (i = 0; i < foldersToDelete.length; i++) {
+      try {
+          fs.accessSync(foldersToDelete[i], fs.F_OK);
+          process.stdout.write(`\n\tThe ` + foldersToDelete[i] +
+              ` directory was found and will be deleted.\n`);
+          del(foldersToDelete[i]);
+      } catch (e) {
+          process.stdout.write(`\n\tThe ` + foldersToDelete[i] +
+              ` directory does NOT exist or is NOT accessible.\n`);
+      }
+  }
+
+  process.stdout.write(`\n`);
+}
+
+exports.safari = series(safari, serve);
+exports.firefox = series(firefox, serve);
+exports.chrome = series(chrome, serve);
+exports.opera = series(opera, serve);
+exports.edge = series(edge, serve);
+exports.safari = series(safari, serve);
+exports.allBrowsers = series(allBrowsers, serve);
 exports.validateHTML = validateHTML;
 exports.compressHTML = compressHTML;
 exports.lintJS = lintJS;
 exports.lintCSS = lintCSS;
+exports.build = series(compressHTML, compileCSSForProd, transpileJSForProd);
+exports.serve = series(validateHTML, compressHTML, lintCSS, lintJS, serve);
+exports.clean = clean;

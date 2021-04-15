@@ -18,12 +18,16 @@
   },
   "homepage": "https://github.com/youmengh/assignment-2--intro-to-internet-programming--cs-275--spring-2021#readme",
   "devDependencies": {
+    "@babel/core": "^7.13.15",
     "browser-sync": "^2.26.14",
     "eslint": "^7.24.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
+    "gulp-eslint": "^6.0.0",
     "gulp-html": "^3.4.0",
     "gulp-htmlmin": "^5.0.1",
-    "gulp-stylelint": "^13.0.0"
+    "gulp-stylelint": "^13.0.0",
+    "gulp-uglify": "^3.0.2",
+    "stylelint": "^13.12.0"
   }
 }
