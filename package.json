@@ -20,6 +20,7 @@
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
-    "gulp-html": "^3.4.0"
+    "gulp-html": "^3.4.0",
+    "gulp-htmlmin": "^5.0.1"
   }
 }
