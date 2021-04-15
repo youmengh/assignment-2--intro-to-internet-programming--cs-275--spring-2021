@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/youmengh/assignment-2--intro-to-internet-programming--cs-275--spring-2021/issues"
   },
-  "homepage": "https://github.com/youmengh/assignment-2--intro-to-internet-programming--cs-275--spring-2021#readme"
+  "homepage": "https://github.com/youmengh/assignment-2--intro-to-internet-programming--cs-275--spring-2021#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
 }
