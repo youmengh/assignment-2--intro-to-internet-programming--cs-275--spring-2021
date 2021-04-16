@@ -76,7 +76,7 @@ let lintJS = () => {
 };
 
 let transpileJSForProd = () => {
-  return src(`dev/scripts/*.js`)
+  return src(`dev/js/*.js`)
       .pipe(babel())
       .pipe(jsCompressor())
       .pipe(dest(`prod/scripts`));
@@ -104,31 +104,26 @@ let compileCSSForProd = () => {
 let serve = () => {
   browserSync({
       notify: true,
-      port: 9000,
-      reloadDelay: 50,
-      browser: browserChoice,
+      reloadDelay: 1,
       server: {
           baseDir: [
-              `temp`,
               `dev`,
-              `dev/html`
           ]
       }
   });
 
-  watch(`dev/scripts/*.js`,
-      series(lintJS, transpileJSForDev)
+  watch(`dev/js/*.js`,
+      series(lintJS)
   ).on(`change`, reload);
 
-  watch(`dev/styles/**/*.scss`,
-      series(compileCSSForDev)
+  watch(`dev/css/**/*.scss`,
+      series(lintCSS)
   ).on(`change`, reload);
 
-  watch(`dev/html/**/*.html`,
+  watch(`dev/**/*.html`,
       series(validateHTML)
   ).on(`change`, reload);
 
-  watch(`dev/img/**/*`).on(`change`, reload);
 };
 
 async function clean() {
