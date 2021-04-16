@@ -41,13 +41,12 @@ async function allBrowsers () {
 
 let validateHTML = () => {
   return src([
-      `dev/html/*.html`,
-      `dev/html/**/*.html`])
+      `dev/*.html`])
       .pipe(htmlValidator());
 };
 
 let compressHTML = () => {
-  return src([`dev/html/*.html`,`dev/html/**/*.html`])
+  return src([`dev/*.html`])
       .pipe(htmlCompressor({collapseWhitespace: true}))
       .pipe(dest(`prod`));
 };
