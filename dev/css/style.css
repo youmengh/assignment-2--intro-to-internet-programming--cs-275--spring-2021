@@ -1,3 +1,65 @@
+h1 {
+  font-family: Garamond, Times, serif;
+  text-align: center;
+  color: #000;
+  font-size: 50px;
+  margin: 50px;
+}
+
+h2 {
+  font-family: Garamond, Times, serif;
+  text-align: center;
+  color: #000;
+  font-size: 30px;
+  margin: 30px;
+}
+
 body {
   background-color: #ffdb99;
+}
+
+.flex {
+  display: flex;
+}
+
+.child {
+  flex: 1;
+  margin-right: 10px;
+}
+
+#btn-white {
+  font-family: Garamond, Times, serif;
+  background: #1594e5;
+  color: #000;
+  display: block;
+  width: 140px;
+  font-size: 24px;
+  padding: 10px;
+  text-align: center;
+  margin: 20px auto;
+  cursor: pointer;
+}
+
+#btn-sprout {
+  font-family: Garamond, Times, serif;
+  background: #1594e5;
+  color: #000;
+  display: block;
+  width: 140px;
+  font-size: 24px;
+  padding: 10px;
+  text-align: center;
+  margin: 20px auto;
+  cursor: pointer;
+}
+
+p {
+  font-family: Garamond, Times, serif;
+  text-align: left;
+  background-color: #1594e5;
+  color: #000;
+  font-size: 20px;
+  border: 2px solid #000;
+  margin: 30px;
+  padding: 40px;
 }
