@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link href="css/reset.css" rel="stylesheet">
   <link href = "css/style.css" rel = "stylesheet">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,21 +10,17 @@
 </head>
 <body>
   <h1> Rice Recipes </h1>
-  <button type="button">White Rice Recipes</button>
-  <button type="button">Sprout Rice Recipes</button>
-  <p>
-    For slightly al dente rice:
-    Combine 1 1/4 cups of rice with 2 cups of water or broth and 1 Tbsp olive oil. Bring to a boil and stir once to mix.
-    Reduce heat to low, cover with a tight-fitting lid and cook for 25 minutes. Remove from heat and let stand for 5 minutes.
-    Fluff with a fork and serve.
-    For softer rice:
-    Increase liquid by 1/2 cup and cook time by 5 minutes.
-  </p>
-  <p>
-    Combine 1 cup of rice with 2 cups of water and 1 Tbsp olive oil.
-    Bring to a boil, then reduce heat to the lowest setting.
-    Cook for about 18 minutes.
-  </p>
+  <h2> Click on the preferred recipes then enter the amount of rice.</h2>
+  <div class = "flex">
+    <div class = "child white">
+      <button id = "btn-white" onclick = "White()">White Rice Recipes</button>
+      <p id = "white"></p>
+    </div>
+    <div class = "child sprout">
+      <button id = "btn-sprout" onclick = "Sprout()">Sprout Rice Recipes</button>
+      <p id = "sprout"></p>
+    </div>
+  </div>
   <script src="js/app.js"></script>
 </body>
 </html>
