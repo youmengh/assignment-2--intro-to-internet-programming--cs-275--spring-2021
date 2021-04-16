@@ -104,10 +104,14 @@ let compileCSSForProd = () => {
 let serve = () => {
   browserSync({
       notify: true,
-      reloadDelay: 1,
+      port: 9000,
+      reloadDelay: 50,
+      browser: browserChoice,
       server: {
           baseDir: [
+              `temp`,
               `dev`,
+              `dev/html`
           ]
       }
   });
